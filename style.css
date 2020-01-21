@@ -1,0 +1,38 @@
+body{
+    background-color: azure;
+}
+main{
+    margin: auto;
+    width:960px;
+}
+header{
+    background-color: beige;
+    height: 100px;
+    text-align: center;
+    margin-bottom: 10vw;
+    font-family: Arial, Helvetica, sans-serif;
+   
+}
+h1{
+    font-size: x-large;
+}
+#left{
+    width: 300px;
+    margin-bottom: 40px;
+}
+#right{
+    width:300px;
+    margin-bottom: 40px;
+}
+#center{
+    width:300px;
+    margin-bottom: 40px;
+}
+li{
+    line-height: 20px;
+}
+footer{
+    background-color: beige;
+    height: 100px;
+    margin: 0 0 0 0;
+}
