@@ -106,6 +106,43 @@ new Product('Usb', '/img/usb.gif');
 new Product('Water-can', '/img/water-can.jpg');
 new Product('Wine-glass', '/img/wine-glass.jpg');
 
-renderImg();
-
 stockImages.addEventListener('click', handleClickOnImg)
+
+var button = document.getElementById('draw');
+button.addEventListener('click', renderChart);
+function renderChart() {
+  var labelData = [];
+  var clickData = [];
+  for (var i = 0; i < Product.allImages.length; i++) {
+    labelData.push(Product.allImages[i].name);
+    clickData.push(Product.allImages[i].clicks);
+  }
+
+  var ctx = document.getElementById('my-chart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labelData,
+      datasets: [{
+        label: '# of Clicks',
+        data: clickData,
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      }, {
+        label: '# of Views',
+        data: [0, 3, 5, 2, 6, 3, 7, 3, 2],
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  })
+}
+renderImg();
