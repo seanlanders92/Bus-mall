@@ -71,7 +71,6 @@ var handleClickOnImg = function (event) {
             var product = Product.allImages[i];
             datalist.textContent = `${product.name} received ${product.clicked} votes with ${product.views} views.`;
             unorderedList.appendChild(datalist);
-            console.log(datalist);
         }
     } else {
         renderImg();
