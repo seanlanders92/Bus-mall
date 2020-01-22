@@ -10,7 +10,7 @@ var centerIndex = null;
 var rightIndex = null;
 var unorderedList = document.getElementById("data");
 var Votes = 0;
-var totalRounds = 10;
+var totalRounds = 25;
 
 function Product(name, image) {
     this.name = name;
@@ -71,13 +71,13 @@ var handleClickOnImg = function (event) {
     if (Votes === totalRounds) {
 
         stockImages.removeEventListener('click', handleClickOnImg);
-
-        for (var i = 0; i < Product.allImages.length; i++) {
-            var datalist = document.createElement('li');
-            var product = Product.allImages[i];
-            datalist.textContent = `${product.name} received ${product.clicked} votes with ${product.views} views.`;
-            unorderedList.appendChild(datalist);
-        }
+        alert('Click the button to view your results!')
+        // for (var i = 0; i < Product.allImages.length; i++) {
+        //     var datalist = document.createElement('li');
+        //     var product = Product.allImages[i];
+        //     datalist.textContent = `${product.name} received ${product.clicked} votes with ${product.views} views.`;
+        //     unorderedList.appendChild(datalist);
+        // }
     } else {
         renderImg();
     }
@@ -113,9 +113,11 @@ button.addEventListener('click', renderChart);
 function renderChart() {
   var labelData = [];
   var clickData = [];
+  var viewData = [];
   for (var i = 0; i < Product.allImages.length; i++) {
     labelData.push(Product.allImages[i].name);
-    clickData.push(Product.allImages[i].clicks);
+    clickData.push(Product.allImages[i].clicked);
+    viewData.push(Product.allImages[i].views);
   }
 
   var ctx = document.getElementById('my-chart').getContext('2d');
@@ -127,11 +129,15 @@ function renderChart() {
       datasets: [{
         label: '# of Clicks',
         data: clickData,
-        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        backgroundColor: 'rgba(255, 145, 0, .5',
+        borderskipped: 'left, top, right',
+        borderWidth: 3,
       }, {
         label: '# of Views',
-        data: [0, 3, 5, 2, 6, 3, 7, 3, 2],
-        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        data: viewData,
+        backgroundColor: 'rgba(255, 68, 0, .5',
+        borderskipped: 'left, top, right',
+        borderWidth: 3,
       }]
     },
     options: {
