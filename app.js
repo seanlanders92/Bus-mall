@@ -10,8 +10,13 @@ var centerIndex = null;
 var rightIndex = null;
 var unorderedList = document.getElementById("data");
 var Votes = 0;
-var totalRounds = 25;
+var totalRounds = 7;
 
+function Storage(name){
+  this.name = name;
+  this.clicked = 0;
+  this.views = 0;
+}
 function Product(name, image) {
     this.name = name;
     this.image = image;
@@ -69,20 +74,34 @@ var handleClickOnImg = function (event) {
     }
 
     if (Votes === totalRounds) {
-
+        updateStorage();
         stockImages.removeEventListener('click', handleClickOnImg);
         alert('Click the button to view your results!')
-        // for (var i = 0; i < Product.allImages.length; i++) {
-        //     var datalist = document.createElement('li');
-        //     var product = Product.allImages[i];
-        //     datalist.textContent = `${product.name} received ${product.clicked} votes with ${product.views} views.`;
-        //     unorderedList.appendChild(datalist);
-        // }
+
     } else {
         renderImg();
     }
 }
+function updateStorage(){
+  if(localStorage.length === 0){
+   var arrayString = JSON.stringify(Product.allImages);
+   localStorage.setItem('productData', arrayString);
+  }else{
+    var arrayString = JSON.stringify(Storage.allData);
+    localStorage.setItem('productData', arrayString);
+  }
+  
+ }
 
+ function getProductData(){
+
+  if(localStorage.length > 0){
+  var productData = localStorage.getItem('productData');
+  var parsedData = JSON.parse(productData);
+  Storage.allData = parsedData;
+  } 
+}
+Storage.allData = [];
 Product.allImages = [];
 
 new Product('Bag', '/img/bag.jpg');
@@ -108,8 +127,55 @@ new Product('Wine-glass', '/img/wine-glass.jpg');
 
 stockImages.addEventListener('click', handleClickOnImg)
 
+var button2 = document.getElementById('history');
+button2.addEventListener('click', renderHistoricalChart);
+
+function renderHistoricalChart() {
+  var labelData = [];
+  var clickData = [];
+  var viewData = [];
+  for (var i = 0; i < Storage.allData.length; i++) {
+    labelData.push(Storage.allData[i].name);
+    clickData.push(Storage.allData[i].clicked);
+    viewData.push(Storage.allData[i].views);
+  }
+
+  var ctx = document.getElementById('my-historical-chart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labelData,
+      datasets: [{
+        label: '# of Clicks',
+        data: clickData,
+        backgroundColor: 'rgba(255, 145, 0, .5',
+        borderskipped: 'left, top, right',
+        borderWidth: 3,
+      }, {
+        label: '# of Views',
+        data: viewData,
+        backgroundColor: 'rgba(255, 68, 0, .5',
+        borderskipped: 'left, top, right',
+        borderWidth: 3,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  })
+}
+
+
 var button = document.getElementById('draw');
 button.addEventListener('click', renderChart);
+
 function renderChart() {
   var labelData = [];
   var clickData = [];
@@ -151,4 +217,5 @@ function renderChart() {
     }
   })
 }
+getProductData();
 renderImg();
