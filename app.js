@@ -11,7 +11,7 @@ var rightIndex = null;
 var unorderedList = document.getElementById("data");
 var Votes = 0;
 var totalRounds = 7;
-
+Storage.allData = [];
 function Storage(name){
   this.name = name;
   this.clicked = 0;
@@ -99,9 +99,10 @@ function updateStorage(){
   var productData = localStorage.getItem('productData');
   var parsedData = JSON.parse(productData);
   Storage.allData = parsedData;
+  console.log(Storage.allData);
   } 
 }
-Storage.allData = [];
+
 Product.allImages = [];
 
 new Product('Bag', '/img/bag.jpg');
@@ -139,7 +140,7 @@ function renderHistoricalChart() {
     clickData.push(Storage.allData[i].clicked);
     viewData.push(Storage.allData[i].views);
   }
-
+  console.log(labelData, clickData, viewData);
   var ctx = document.getElementById('my-historical-chart').getContext('2d');
 
   new Chart(ctx, {
