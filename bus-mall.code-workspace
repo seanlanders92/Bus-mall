@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "Bus-mall",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Bus-mall"
+	}
+}
