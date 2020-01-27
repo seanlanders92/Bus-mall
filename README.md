@@ -1,1 +1,2 @@
 # Bus-mall
+> Bus mall is a tool that takes in user preferences and displays results on an easy to read graph. Show data displays the user preferences for the current session. While Historical data displays the users lifetime preferences based on data stored in local storage. Bias control features include no two images will appear at the same time as well as once a user has seen 3 images the next 3 will not be the same as the previous.

@@ -32,7 +32,7 @@ function randomImg() {
   var randomNumber = Math.floor(Math.random() * Product.allImages.length);
   return randomNumber;
 }
-
+// renders images and controls the images sorting
 function renderImg() {
 
   do {
@@ -55,7 +55,7 @@ function renderImg() {
   indexArray[1] = centerIndex;
   indexArray[2] = rightIndex;
 }
-
+// handles the clicking
 var handleClickOnImg = function (event) {
   var productClicked = event.target.id;
 
@@ -84,7 +84,7 @@ var handleClickOnImg = function (event) {
     renderImg();
   }
 }
-
+// Pull local storage data down and updates it with the current session data.
 function updateStorage() {
   if (localStorage.length === 0) {
     var arrayString = JSON.stringify(Product.allImages);
